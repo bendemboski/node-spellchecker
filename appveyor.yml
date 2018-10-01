@@ -1,3 +1,10 @@
+image: Visual Studio 2017
+platform:
+  - x64
+
+cache:
+  - node_modules
+
 environment:
   matrix:
     - nodejs_version: '10'
@@ -7,12 +14,18 @@ environment:
     - nodejs_version: '6'
 
 install:
-  - ps: Install-Product node $env:nodejs_version
+  - ps: Install-Product node $env:nodejs_version x64
   - npm --msvs_version=2015 install
 
-test_script:
+build_script:
   - node --version
   - npm --version
   - npm test
+  - if not defined SPELLCHECKER_PREFER_HUNSPELL (npm run prebuild-node)
+  - if not defined SPELLCHECKER_PREFER_HUNSPELL (npm run prebuild-node-ia32)
+  - if not defined SPELLCHECKER_PREFER_HUNSPELL (npm run prebuild-electron)
+  - if not defined SPELLCHECKER_PREFER_HUNSPELL (npm run prebuild-electron-ia32)
+  - if not defined SPELLCHECKER_PREFER_HUNSPELL if defined APPVEYOR_REPO_TAG_NAME (npm run upload)
 
-build: off
+test: off
+deploy: off
