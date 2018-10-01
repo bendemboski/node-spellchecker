@@ -2,3 +2,8 @@
 build/
 node_modules/
 npm-debug.log
+
+prebuilds/
+iojs-*/
+8.*/
+6.*/
