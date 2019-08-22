@@ -7,9 +7,10 @@ cache:
 
 environment:
   matrix:
-    - nodejs_version: '10'
-    - nodejs_version: '10'
+    - nodejs_version: '12'
+    - nodejs_version: '12'
       SPELLCHECKER_PREFER_HUNSPELL: true
+    - nodejs_version: '10'
     - nodejs_version: '8'
 
 install:
@@ -21,7 +22,7 @@ build_script:
   - npm --version
   - ps: Write-Host $env:SPELLCHECKER_PREFER_HUNSPELL
   - npm test
-  - if "%nodejs_version%"=="10" if not defined SPELLCHECKER_PREFER_HUNSPELL if defined APPVEYOR_REPO_TAG_NAME (set DO_PREBUILD=1)
+  - if "%nodejs_version%"=="12" if not defined SPELLCHECKER_PREFER_HUNSPELL if defined APPVEYOR_REPO_TAG_NAME (set DO_PREBUILD=1)
   - if defined DO_PREBUILD (npm run prebuild-node)
   - if defined DO_PREBUILD (npm run prebuild-node-ia32)
   - if defined DO_PREBUILD (npm run prebuild-electron)
