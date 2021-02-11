@@ -32,8 +32,6 @@ for:
     deploy: off
 
 before_deploy:
-  - if defined DO_PREBUILD (npm run prebuild-node)
-  - if defined DO_PREBUILD (npm run prebuild-node-ia32)
   - if defined DO_PREBUILD (npm run prebuild-electron)
   - if defined DO_PREBUILD (npm run prebuild-electron-ia32)
 

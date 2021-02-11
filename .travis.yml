@@ -33,7 +33,6 @@ script:
 # a nasty build failure surprise *after* having already tagged a build.
 #
 before_deploy:
-  - npm run prebuild-node
   - npm run prebuild-electron
 
 deploy:
