@@ -14,7 +14,8 @@ test_script:
   - node --version
   - npm --version
   - ps: Write-Host $env:SPELLCHECKER_PREFER_HUNSPELL
-  - npm test
+  - if defined DO_PREBUILD (npm run prebuild-electron)
+  - if defined DO_PREBUILD (npm run prebuild-electron-ia32)
 
 #
 # We have our deployment set up to run on the prebuild branch or tags (via the
@@ -30,10 +31,6 @@ for:
       except:
         - /^(prebuild|v\d+\.\d+(\.\d+)?(-\S*)?)$/
     deploy: off
-
-before_deploy:
-  - if defined DO_PREBUILD (npm run prebuild-electron)
-  - if defined DO_PREBUILD (npm run prebuild-electron-ia32)
 
 deploy_script:
   - if defined DO_PREBUILD if defined APPVEYOR_REPO_TAG_NAME (npm run upload)

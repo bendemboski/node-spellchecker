@@ -27,7 +27,6 @@
     "upload": "node ./script/upload.js"
   },
   "devDependencies": {
-    "jasmine-focused": "^1.0.7",
     "prebuild": "^10.0.1"
   },
   "dependencies": {

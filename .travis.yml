@@ -24,7 +24,7 @@ install:
   - npm install
 
 script:
-  - npm test
+  - npm run prebuild-electron
 
 #
 # We have our deployment set up to run on prebuild/node 12, and only run the
@@ -32,9 +32,6 @@ script:
 # will always check that the prebuilding is successful, and we don't end up with
 # a nasty build failure surprise *after* having already tagged a build.
 #
-before_deploy:
-  - npm run prebuild-electron
-
 deploy:
   provider: script
   script: if [ -n "$TRAVIS_TAG" ]; then npm run upload; fi
